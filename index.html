@@ -45,6 +45,7 @@ assumptions (product name, pre-launch status, French administrative scope).
     </a>
     <nav class="site-nav" aria-label="Navigation principale">
       <a href="#comment-ca-marche">Comment ça marche</a>
+      <a href="#demo">Voir un exemple</a>
       <a href="#demarches">Démarches couvertes</a>
       <a href="#honnetement">En toute franchise</a>
     </nav>
@@ -123,6 +124,63 @@ assumptions (product name, pre-launch status, French administrative scope).
           <p>Rien n'est envoyé sans votre accord. Vous relisez le dossier prérempli, vous corrigez si besoin, vous validez.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="demo" id="demo" aria-labelledby="demo-heading">
+    <div class="wrap">
+      <h2 id="demo-heading">Formalia en situation</h2>
+      <p class="section-lede">Trois exemples simulés, pour donner une idée concrète de ce que fait l'agent — aucun de ces échanges n'est réel, ce sont des illustrations du mécanisme.</p>
+
+      <div class="demo-widget" data-demo>
+        <div class="demo-tabs" role="tablist" aria-label="Choisir un exemple de démarche">
+          <button type="button" class="demo-tab is-active" role="tab" aria-selected="true" aria-controls="demo-panel-passeport" id="demo-tab-passeport" data-target="passeport">Passeport</button>
+          <button type="button" class="demo-tab" role="tab" aria-selected="false" aria-controls="demo-panel-caf" id="demo-tab-caf" data-target="caf">Dossier CAF</button>
+          <button type="button" class="demo-tab" role="tab" aria-selected="false" aria-controls="demo-panel-sejour" id="demo-tab-sejour" data-target="sejour">Titre de séjour</button>
+        </div>
+
+        <div class="demo-panel is-active" id="demo-panel-passeport" role="tabpanel" aria-labelledby="demo-tab-passeport" data-panel="passeport">
+          <div class="demo-transcript">
+            <p class="demo-bubble demo-bubble-user"><span class="demo-who">Vous</span>Mon passeport expire dans deux mois, je vis à Lyon et je pars en voyage en juillet.</p>
+            <p class="demo-bubble demo-bubble-agent"><span class="demo-who">Formalia</span>Renouvellement de passeport identifié (Cerfa n° 12100*02). Il vous faut : une photo d'identité récente, un justificatif de domicile à Lyon, votre ancien passeport. Je prépare le dossier avec vos informations déjà connues.</p>
+            <p class="demo-bubble demo-bubble-agent demo-bubble-result"><span class="demo-who">Formalia</span>Dossier prérempli, prêt à relire — délai en mairie de Lyon généralement inférieur à celui d'un dépôt sans rendez-vous.</p>
+          </div>
+          <div class="demo-doc" aria-hidden="true">
+            <div class="demo-doc-head"><span>Cerfa 12100*02</span><span>Renouvellement — Passeport</span></div>
+            <div class="demo-doc-row"><span>Commune de dépôt</span><strong>Lyon (69)</strong></div>
+            <div class="demo-doc-row"><span>Motif</span><strong>Renouvellement, expiration proche</strong></div>
+            <div class="demo-doc-row"><span>Pièces requises</span><strong>Photo, justif. domicile, ancien passeport</strong></div>
+          </div>
+        </div>
+
+        <div class="demo-panel" id="demo-panel-caf" role="tabpanel" aria-labelledby="demo-tab-caf" hidden data-panel="caf">
+          <div class="demo-transcript">
+            <p class="demo-bubble demo-bubble-user"><span class="demo-who">Vous</span>Je viens d'emménager en colocation, je voudrais savoir si j'ai droit aux APL.</p>
+            <p class="demo-bubble demo-bubble-agent"><span class="demo-who">Formalia</span>Situation identifiée : demande d'aide au logement (APL) en colocation. Il me faut votre bail, votre dernier avis d'imposition et le montant du loyer par personne. Je commence à remplir votre dossier CAF.</p>
+            <p class="demo-bubble demo-bubble-agent demo-bubble-result"><span class="demo-who">Formalia</span>Dossier CAF prérempli avec la quote-part de loyer calculée pour votre colocation — à valider avant envoi.</p>
+          </div>
+          <div class="demo-doc" aria-hidden="true">
+            <div class="demo-doc-head"><span>CAF — Aide au logement</span><span>Colocation</span></div>
+            <div class="demo-doc-row"><span>Statut</span><strong>Colocataire</strong></div>
+            <div class="demo-doc-row"><span>Quote-part loyer</span><strong>Calculée automatiquement</strong></div>
+            <div class="demo-doc-row"><span>Pièces requises</span><strong>Bail, avis d'imposition</strong></div>
+          </div>
+        </div>
+
+        <div class="demo-panel" id="demo-panel-sejour" role="tabpanel" aria-labelledby="demo-tab-sejour" hidden data-panel="sejour">
+          <div class="demo-transcript">
+            <p class="demo-bubble demo-bubble-user"><span class="demo-who">Vous</span>Mon titre de séjour étudiant se termine en septembre, je continue mes études l'an prochain.</p>
+            <p class="demo-bubble demo-bubble-agent"><span class="demo-who">Formalia</span>Renouvellement identifié (Cerfa n° 12100*07, motif études). Il me faut votre certificat de scolarité, un justificatif de ressources et votre titre actuel. Je prépare le dossier en préfecture.</p>
+            <p class="demo-bubble demo-bubble-agent demo-bubble-result"><span class="demo-who">Formalia</span>Dossier prérempli avec anticipation du délai préfectoral — pensez à déposer avant l'échéance de septembre.</p>
+          </div>
+          <div class="demo-doc" aria-hidden="true">
+            <div class="demo-doc-head"><span>Cerfa 12100*07</span><span>Renouvellement — Titre de séjour</span></div>
+            <div class="demo-doc-row"><span>Motif</span><strong>Études</strong></div>
+            <div class="demo-doc-row"><span>Échéance</span><strong>Septembre</strong></div>
+            <div class="demo-doc-row"><span>Pièces requises</span><strong>Certificat scolarité, ressources</strong></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

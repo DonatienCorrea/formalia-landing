@@ -103,4 +103,36 @@
 
   wireForm("waitlist-form", ".hero-form-note");
   wireForm("waitlist-form-2", ".cta-form-note");
+
+  // --- Demo tabs: accessible tablist switching between simulated scenarios ---
+  const demoWidget = document.querySelector("[data-demo]");
+  if (demoWidget) {
+    const tabs = [...demoWidget.querySelectorAll(".demo-tab")];
+    const panels = [...demoWidget.querySelectorAll(".demo-panel")];
+
+    const activate = (target) => {
+      tabs.forEach((tab) => {
+        const isTarget = tab.dataset.target === target;
+        tab.classList.toggle("is-active", isTarget);
+        tab.setAttribute("aria-selected", String(isTarget));
+        tab.tabIndex = isTarget ? 0 : -1;
+      });
+      panels.forEach((panel) => {
+        const isTarget = panel.dataset.panel === target;
+        panel.classList.toggle("is-active", isTarget);
+        panel.hidden = !isTarget;
+      });
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => activate(tab.dataset.target));
+      tab.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+        event.preventDefault();
+        const next = event.key === "ArrowRight" ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length;
+        tabs[next].focus();
+        activate(tabs[next].dataset.target);
+      });
+    });
+  }
 })();

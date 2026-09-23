@@ -443,6 +443,134 @@ a { color: inherit; }
   margin: 0;
 }
 
+/* ---------- Demo — simulated example ---------- */
+.demo {
+  padding: 5rem 0;
+  background: var(--ink-deep);
+  border-top: 1px solid rgba(247, 242, 230, 0.1);
+  border-bottom: 1px solid rgba(247, 242, 230, 0.1);
+}
+.demo h2 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  color: var(--cream);
+  max-width: 22ch;
+}
+
+.demo-widget { margin-top: 2rem; }
+
+.demo-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+.demo-tab {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius);
+  border: 1.5px solid rgba(247, 242, 230, 0.3);
+  background: transparent;
+  color: rgba(247, 242, 230, 0.78);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+.demo-tab:hover { border-color: var(--paper); color: var(--cream); }
+.demo-tab.is-active {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink-deep);
+}
+
+.demo-panel {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: start;
+}
+.demo-panel[hidden] { display: none; }
+@media (max-width: 800px) {
+  .demo-panel { grid-template-columns: 1fr; }
+}
+
+.demo-transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.demo-bubble {
+  margin: 0;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  max-width: 42ch;
+}
+.demo-who {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  opacity: 0.7;
+}
+.demo-bubble-user {
+  background: rgba(247, 242, 230, 0.1);
+  color: var(--cream);
+  align-self: flex-start;
+}
+.demo-bubble-agent {
+  background: var(--paper);
+  color: var(--ink-on-paper);
+  align-self: flex-start;
+  margin-left: 1.25rem;
+}
+.demo-bubble-result {
+  background: #f3ddc0;
+  position: relative;
+  padding-left: 1.4rem;
+}
+.demo-bubble-result::before {
+  content: "✓";
+  position: absolute;
+  left: 0.5rem;
+  top: 0.95rem;
+  color: var(--stamp-red);
+  font-weight: 700;
+}
+
+.demo-doc {
+  background: var(--paper);
+  color: var(--ink-on-paper);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.5rem 1.75rem;
+  box-shadow: var(--shadow-paper);
+  border: 1px solid var(--paper-line);
+}
+.demo-doc-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-tint);
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1rem;
+}
+.demo-doc-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed var(--paper-line);
+}
+.demo-doc-row:last-child { border-bottom: none; }
+.demo-doc-row span { color: var(--ink-tint); }
+
 /* ---------- Démarches — folder tabs ---------- */
 .demarches {
   background: var(--paper);
