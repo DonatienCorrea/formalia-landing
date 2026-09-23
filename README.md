@@ -16,8 +16,8 @@ tel quel par **GitHub Pages**.
 
 ```
 index.html     Page unique
-styles.css     Styles (monde visuel "le cachet officiel")
-script.js      Animation du formulaire + gestion des formulaires
+styles.css     Styles (portail administratif moderne, institutionnel et sobre)
+script.js      Animation du dossier + gestion des formulaires
 assets/        Favicon SVG
 PRODUCT.md     Contexte produit (Impeccable) : hypothèses posées, à relire
 ```

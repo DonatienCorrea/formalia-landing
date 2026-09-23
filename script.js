@@ -1,59 +1,88 @@
-// Formalia landing — small, honest interactions.
-// No real backend exists yet: the waitlist forms confirm locally in the UI
-// and do not silently pretend an email was sent anywhere. Wire a real
-// endpoint (Formspree, Buttondown, your own API) before launch — see README.
+// Formalia landing — honest, local-only interactions.
+// The waitlist forms validate in the UI and do not send data anywhere until a
+// real signup endpoint is connected.
 
 (() => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // --- Cerfa autofill + stamp animation, replayed on scroll into view ---
-  const cerfaCard = document.querySelector(".cerfa-card");
-  if (cerfaCard) {
-    const boxRows = cerfaCard.querySelectorAll(".cerfa-boxes");
-    const stamp = cerfaCard.querySelector(".stamp");
+  const dossier = document.querySelector(".dossier-console");
+  if (dossier) {
+    const boxRows = dossier.querySelectorAll(".cerfa-boxes");
+    const steps = [...dossier.querySelectorAll(".dossier-step")];
+    const badge = dossier.querySelector("#console-badge");
+    const status = dossier.querySelector("#console-status");
 
     const buildLetters = (row) => {
       const word = row.dataset.word || "";
       row.innerHTML = "";
-      [...word].forEach((ch) => {
+      [...word].forEach((character) => {
         const span = document.createElement("span");
         span.className = "cerfa-letter";
-        span.textContent = ch;
+        span.textContent = character;
         row.appendChild(span);
       });
     };
+
+    const markStep = (currentIndex) => {
+      steps.forEach((step, index) => {
+        step.classList.toggle("is-current", index === currentIndex);
+        step.classList.toggle("is-complete", index < currentIndex);
+      });
+    };
+
     boxRows.forEach(buildLetters);
 
     const playSequence = () => {
-      boxRows.forEach((row) => row.classList.remove("is-filling"));
-      if (stamp) stamp.classList.remove("is-stamped");
-
       let delay = 0;
-      boxRows.forEach((row) => {
+
+      boxRows.forEach((row) => row.classList.remove("is-filling"));
+      if (badge) badge.classList.remove("is-ready");
+      if (badge) badge.textContent = "Simulation illustrative";
+      if (status) status.textContent = "Préremplissage en cours";
+      markStep(0);
+
+      boxRows.forEach((row, index) => {
         const letters = row.querySelectorAll(".cerfa-letter");
-        letters.forEach((el, i) => {
-          el.style.animationDelay = `${delay + i * 55}ms`;
+        letters.forEach((letter, letterIndex) => {
+          letter.style.animationDelay = `${delay + letterIndex * 55}ms`;
         });
-        // eslint-disable-next-line no-unused-expressions
-        row.offsetWidth; // restart CSS animation
+        // Force restart.
+        row.offsetWidth;
         row.classList.add("is-filling");
-        delay += letters.length * 55 + 120;
+
+        const nextStepIndex = Math.min(index + 1, steps.length - 1);
+        window.setTimeout(() => markStep(nextStepIndex), delay + Math.max(letters.length * 55 - 80, 0));
+        delay += letters.length * 55 + 140;
       });
 
-      if (stamp) {
-        window.setTimeout(() => stamp.classList.add("is-stamped"), delay + 200);
-      }
+      window.setTimeout(() => {
+        steps.forEach((step) => {
+          step.classList.remove("is-current");
+          step.classList.add("is-complete");
+        });
+        if (badge) {
+          badge.classList.add("is-ready");
+          badge.textContent = "Dossier prêt à relire";
+        }
+        if (status) status.textContent = "Préremplissage terminé";
+      }, delay + 220);
     };
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       boxRows.forEach((row) => {
-        row.querySelectorAll(".cerfa-letter").forEach((el) => {
-          el.style.opacity = "1";
-          el.style.transform = "none";
+        row.querySelectorAll(".cerfa-letter").forEach((letter) => {
+          letter.style.opacity = "1";
+          letter.style.transform = "none";
         });
       });
-      if (stamp) { stamp.style.opacity = "0.92"; stamp.style.transform = "rotate(-9deg) scale(1)"; }
+      steps.forEach((step) => step.classList.add("is-complete"));
+      steps.forEach((step) => step.classList.remove("is-current"));
+      if (badge) {
+        badge.classList.add("is-ready");
+        badge.textContent = "Dossier prêt à relire";
+      }
+      if (status) status.textContent = "Préremplissage terminé";
     } else if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -64,24 +93,24 @@
             }
           });
         },
-        { threshold: 0.4 }
+        { threshold: 0.45 }
       );
-      observer.observe(cerfaCard);
+      observer.observe(dossier);
     } else {
       playSequence();
     }
   }
 
-  // --- Waitlist forms: honest local confirmation, no fake backend ---
   const wireForm = (formId, noteSelector) => {
     const form = document.getElementById(formId);
     if (!form) return;
+
     const note = form.parentElement.querySelector(noteSelector) || form.nextElementSibling;
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const input = form.querySelector('input[type="email"]');
-      const value = (input.value || "").trim();
+      const value = (input?.value || "").trim();
       const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
       if (!valid) {
@@ -89,7 +118,7 @@
           note.textContent = "Merci d'indiquer une adresse e-mail valide.";
           note.dataset.state = "error";
         }
-        input.focus();
+        input?.focus();
         return;
       }
 
@@ -104,7 +133,6 @@
   wireForm("waitlist-form", ".hero-form-note");
   wireForm("waitlist-form-2", ".cta-form-note");
 
-  // --- Demo tabs: accessible tablist switching between simulated scenarios ---
   const demoWidget = document.querySelector("[data-demo]");
   if (demoWidget) {
     const tabs = [...demoWidget.querySelectorAll(".demo-tab")];
@@ -117,6 +145,7 @@
         tab.setAttribute("aria-selected", String(isTarget));
         tab.tabIndex = isTarget ? 0 : -1;
       });
+
       panels.forEach((panel) => {
         const isTarget = panel.dataset.panel === target;
         panel.classList.toggle("is-active", isTarget);
@@ -124,14 +153,16 @@
       });
     };
 
-    tabs.forEach((tab, i) => {
+    tabs.forEach((tab, index) => {
       tab.addEventListener("click", () => activate(tab.dataset.target));
       tab.addEventListener("keydown", (event) => {
         if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
         event.preventDefault();
-        const next = event.key === "ArrowRight" ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length;
-        tabs[next].focus();
-        activate(tabs[next].dataset.target);
+        const nextIndex = event.key === "ArrowRight"
+          ? (index + 1) % tabs.length
+          : (index - 1 + tabs.length) % tabs.length;
+        tabs[nextIndex].focus();
+        activate(tabs[nextIndex].dataset.target);
       });
     });
   }
