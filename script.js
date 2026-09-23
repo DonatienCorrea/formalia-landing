@@ -210,6 +210,7 @@
 
     const resetSimulation = () => {
       window.clearTimeout(completionTimer);
+      completionTimer = null;
       procedure = null;
       questionIndex = 0;
       answers = [];
@@ -221,6 +222,12 @@
       resetButton.hidden = true;
       liveRegion.textContent = "";
       setStage(0);
+      previewStatus.textContent = "À compléter";
+      previewStatus.classList.remove("is-ready");
+      questionTitle.textContent = "";
+      questionOptions.replaceChildren();
+      previewFields.replaceChildren();
+      documents.replaceChildren();
       procedureStep.querySelector("input")?.focus();
     };
 
@@ -262,6 +269,7 @@
 
     backButton.addEventListener("click", () => {
       window.clearTimeout(completionTimer);
+      completionTimer = null;
       if (questionIndex === 0) {
         procedure = null;
         answers = [];
@@ -279,7 +287,10 @@
       renderQuestion();
     });
 
-    resetButton.addEventListener("click", resetSimulation);
+    resetButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      resetSimulation();
+    });
   }
 
   const wireForm = (formId, noteSelector) => {
