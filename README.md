@@ -55,6 +55,16 @@ La simulation couvre ses états initial, en cours, terminé et réinitialisé.
 Elle reste utilisable au clavier et devient instantanée lorsque
 `prefers-reduced-motion: reduce` est activé.
 
+## Personas illustratifs
+
+La section de situations présente trois personas entièrement fictifs, avec
+des avatars SVG abstraits créés pour la page. Leurs formulations décrivent
+des besoins et des attentes possibles : elles ne constituent pas des avis,
+des citations de clients ni une preuve d'utilisation du produit. Lorsque de
+véritables témoignages seront disponibles, ils devront être recueillis avec
+le consentement explicite des personnes concernées et remplacer ces exemples
+sans ambiguïté sur leur origine.
+
 ## Déploiement (GitHub Pages)
 
 Le site est publié via GitHub Pages, branche `main`, dossier racine. Toute
