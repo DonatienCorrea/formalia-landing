@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Formalia : vos démarches administratives, remplies sans vous</title>
+<meta name="description" content="Formalia est un agent qui remplit seul vos démarches administratives : passeport, CNI, visas, titre de séjour, CAF, logement, assurances. Rejoignez l'accès anticipé." />
+<meta property="og:title" content="Formalia : vos démarches, remplies sans vous" />
+<meta property="og:description" content="Un agent qui identifie et remplit vos formulaires administratifs à votre place." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!--
+THESIS: Paperwork gets stamped and filed, not typed into a chat panel — Formalia
+is the hand behind the stamp, refusing the generic "AI assistant" SaaS template.
+OWN-WORLD: Ink-blue (#14213D) as the dominant field over aged kraft-paper panels
+(#EDE3CC); Space Grotesk display, IBM Plex Sans body, Space Mono for reference
+codes; stamp-red (#C81E3A) reserved only for validation marks. Cerfa-box input
+grid and folder-tab section markers replace generic cards.
+STORY: Visitor recognizes the dread of admin paperwork, watches the agent fill
+and stamp a real-looking form in seconds, understands the 3-step mechanism,
+sees the breadth of procedures covered, and joins early access honestly (no
+fake product screenshots, pricing, or testimonials — this is pre-launch).
+FIRST VIEWPORT: headline + CTA on ink-blue field beside a paper Cerfa-style
+form mid-autofill, letter boxes lighting up in sequence, capped by a rotating
+stamp landing "TRAITÉ".
+FORM: grounded direction 3 of 7 (le cachet officiel), seed 278edca5, degraded
+roll (no catalog reachable), built unattended — see PRODUCT.md for disclosed
+assumptions (product name, pre-launch status, French administrative scope).
+-->
+<a class="skip-link" href="#main">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="30" height="30"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M14 25l6 6 14-14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Formalia
+    </a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      <a href="#comment-ca-marche">Comment ça marche</a>
+      <a href="#demarches">Démarches couvertes</a>
+      <a href="#honnetement">En toute franchise</a>
+    </nav>
+    <a class="btn btn-ghost header-cta" href="#rejoindre">Accès anticipé</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Vos démarches administratives.<br><span class="ink-underline">Remplies.</span> Sans vous.</h1>
+        <p class="hero-lede">Formalia est un agent qui lit votre situation, choisit le bon formulaire et le remplit à votre place : passeport, CNI, visa, titre de séjour, CAF, logement, assurance, et le reste du dossier.</p>
+        <form class="hero-form" id="waitlist-form" novalidate>
+          <label class="sr-only" for="email-hero">Adresse e-mail</label>
+          <input type="email" id="email-hero" name="email" placeholder="vous@exemple.fr" autocomplete="email" required />
+          <button type="submit" class="btn btn-primary">Rejoindre l'accès anticipé</button>
+        </form>
+        <p class="hero-form-note" role="status" aria-live="polite"></p>
+        <p class="hero-trust">Aucun formulaire officiel n'est déposé sans votre relecture. Produit en développement, voir « en toute franchise » ci-dessous.</p>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="cerfa-card">
+          <div class="cerfa-head">
+            <span class="cerfa-code">N° 12100*07</span>
+            <span class="cerfa-title">Demande — Titre de séjour</span>
+          </div>
+          <div class="cerfa-row">
+            <span class="cerfa-label">Nom</span>
+            <span class="cerfa-boxes" data-word="MARTIN"></span>
+          </div>
+          <div class="cerfa-row">
+            <span class="cerfa-label">Prénom</span>
+            <span class="cerfa-boxes" data-word="AWA"></span>
+          </div>
+          <div class="cerfa-row">
+            <span class="cerfa-label">Né(e) le</span>
+            <span class="cerfa-boxes cerfa-boxes-num" data-word="14031994"></span>
+          </div>
+          <div class="cerfa-row">
+            <span class="cerfa-label">Motif</span>
+            <span class="cerfa-boxes" data-word="ETUDES"></span>
+          </div>
+          <div class="stamp" id="stamp">TRAITÉ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pain" aria-labelledby="pain-heading">
+    <div class="wrap pain-grid">
+      <p id="pain-heading" class="pain-lead">Un dossier CAF qui traîne. Un renouvellement de CNI reporté trois fois. Un titre de séjour dont personne ne sait quelle pièce manque encore.</p>
+      <p class="pain-body">Chaque démarche a son propre formulaire, son propre jargon, sa propre pièce justificative introuvable. Ce n'est pas la difficulté qui épuise, c'est la répétition. Formalia s'en charge une fois pour toutes.</p>
+    </div>
+  </section>
+
+  <section class="how" id="comment-ca-marche" aria-labelledby="how-heading">
+    <div class="wrap">
+      <h2 id="how-heading">Comment ça marche</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-index" aria-hidden="true">Étape 1</span>
+          <h3>Vous décrivez votre situation</h3>
+          <p>En quelques phrases ou en important vos documents existants (identité, justificatifs, situation familiale), une seule fois.</p>
+        </li>
+        <li class="step">
+          <span class="step-index" aria-hidden="true">Étape 2</span>
+          <h3>L'agent identifie le bon dossier</h3>
+          <p>Formalia détermine quel formulaire s'applique (CNI, passeport, visa, CAF, logement, assurance) et le remplit champ par champ.</p>
+        </li>
+        <li class="step">
+          <span class="step-index" aria-hidden="true">Étape 3</span>
+          <h3>Vous relisez, vous validez</h3>
+          <p>Rien n'est envoyé sans votre accord. Vous relisez le dossier prérempli, vous corrigez si besoin, vous validez.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="demarches" id="demarches" aria-labelledby="demarches-heading">
+    <div class="wrap">
+      <h2 id="demarches-heading">Les démarches que Formalia sait remplir</h2>
+      <p class="section-lede">Une liste qui s'agrandit, pensée pour couvrir les dossiers administratifs qui reviennent, année après année.</p>
+      <ul class="tabs-list">
+        <li class="tab-item"><span class="tab-index">01</span>Passeport</li>
+        <li class="tab-item"><span class="tab-index">02</span>Carte nationale d'identité</li>
+        <li class="tab-item"><span class="tab-index">03</span>Visas</li>
+        <li class="tab-item"><span class="tab-index">04</span>Titre / carte de séjour</li>
+        <li class="tab-item"><span class="tab-index">05</span>Dossier CAF</li>
+        <li class="tab-item"><span class="tab-index">06</span>Dossier de logement</li>
+        <li class="tab-item"><span class="tab-index">07</span>Assurances</li>
+        <li class="tab-item tab-item-more"><span class="tab-index">+</span>Et la suite du dossier</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="honest" id="honnetement" aria-labelledby="honest-heading">
+    <div class="wrap honest-grid">
+      <h2 id="honest-heading">En toute franchise</h2>
+      <p>Formalia est en développement. Cette page ne montre ni capture d'écran, ni chiffre, ni client existant, parce qu'il n'y en a pas encore à vous montrer honnêtement. Ce qui existe : une direction claire, et une liste d'accès anticipé qui décidera de l'ordre d'arrivée des premiers dossiers traités.</p>
+    </div>
+  </section>
+
+  <section class="cta-final" id="rejoindre" aria-labelledby="cta-heading">
+    <div class="wrap cta-grid">
+      <div>
+        <h2 id="cta-heading">Un dossier de moins à porter seul.</h2>
+        <p>Laissez votre e-mail : vous serez prévenu·e dès l'ouverture de l'accès anticipé, dans l'ordre d'inscription.</p>
+      </div>
+      <form class="cta-form" id="waitlist-form-2" novalidate>
+        <label class="sr-only" for="email-footer">Adresse e-mail</label>
+        <input type="email" id="email-footer" name="email" placeholder="vous@exemple.fr" autocomplete="email" required />
+        <button type="submit" class="btn btn-stamp">Je rejoins la liste</button>
+      </form>
+      <p class="cta-form-note" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© <span id="year"></span> Formalia, projet en développement.</span>
+    <a href="https://github.com/DonatienCorrea/formalia-landing" target="_blank" rel="noopener">Code source sur GitHub</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
