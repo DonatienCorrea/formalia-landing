@@ -18,11 +18,12 @@
 <!--
 THESIS: Formalia should feel like a trustworthy public-service portal under real administrative pressure, not a startup hero or a paper-stamp parody.
 OWN-WORLD: White and pale-slate service surfaces, institutional blue (#000091), restrained signal red, crisp 1px rules, portal masthead, dossier grids, notice panels, and formal controls driven by Archivo + Public Sans.
-STORY: The visitor recognizes the burden, sees the agent classify and prefill a dossier, understands the three-step path, tests realistic scenarios, checks the covered procedures, then joins the waitlist with full honesty about maturity.
-FIRST VIEWPORT: Official-feeling masthead above a two-column portal; left side carries the headline, explanation, form, and trust note, right side shows an animated dossier workspace progressing from situation read to dossier ready.
+STORY: The visitor recognizes the burden, tries a transparent no-data simulation that turns a fictitious situation into a structured dossier, explores grouped procedures by life profile, then joins the waitlist with full honesty about maturity.
+FIRST VIEWPORT: Official-feeling masthead above a two-column portal; left side carries the promise and honest waitlist, while the right side starts a keyboard-accessible mini-simulation whose dossier, checklist, and processing path respond to the visitor's choices.
 FORM: modern guichet numérique, direct redesign under explicit brief, replacing the prior stamp-and-paper world with a structured service portal grammar.
 -->
 <a class="skip-link" href="#main">Aller au contenu</a>
+<div class="reading-progress" aria-hidden="true"><span></span></div>
 
 <header class="site-header">
   <div class="header-bar">
@@ -47,7 +48,7 @@ FORM: modern guichet numérique, direct redesign under explicit brief, replacing
     </a>
     <nav class="site-nav" aria-label="Navigation principale">
       <a href="#comment-ca-marche">Comment ça marche</a>
-      <a href="#demo">Voir un exemple</a>
+      <a href="#simulateur">Essayer la simulation</a>
       <a href="#demarches">Démarches couvertes</a>
       <a href="#honnetement">En toute franchise</a>
     </nav>
@@ -75,51 +76,63 @@ FORM: modern guichet numérique, direct redesign under explicit brief, replacing
         <p class="hero-trust">Aucun formulaire officiel n'est déposé sans votre relecture. Produit en développement : cette page décrit un service en préparation, pas un portail public existant.</p>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
-        <div class="dossier-console">
-          <div class="console-head">
+      <div class="hero-visual" id="simulateur">
+        <div class="simulator panel" data-simulator>
+          <div class="simulator-head">
             <div>
-              <p class="console-kv">Dossier détecté</p>
-              <strong>Renouvellement — Titre de séjour étudiant</strong>
+              <p class="simulation-notice">Simulation — aucune donnée envoyée</p>
+              <h2 id="simulator-title">Testez Formalia sur un cas fictif</h2>
             </div>
-            <span class="console-badge" id="console-badge">Simulation illustrative</span>
+            <button class="reset-button" type="button" data-reset hidden>Recommencer</button>
           </div>
-          <div class="console-grid">
-            <div class="console-sheet">
-              <div class="sheet-row sheet-row-head">
-                <span class="sheet-code">CERFA 12100*07</span>
-                <span class="sheet-code">Préfecture — Préremplissage</span>
+
+          <ol class="process-rail" aria-label="Progression de la simulation">
+            <li class="is-current" aria-current="step"><span>1</span>Situation comprise</li>
+            <li><span>2</span>Formulaire identifié</li>
+            <li><span>3</span>Informations reportées</li>
+            <li><span>4</span>Pièces vérifiées</li>
+            <li><span>5</span>Prêt à valider</li>
+          </ol>
+
+          <form class="simulator-form" data-simulator-form aria-labelledby="simulator-title">
+            <fieldset class="simulator-step" data-procedure-step>
+              <legend>Quelle démarche voulez-vous simuler&nbsp;?</legend>
+              <div class="choice-grid">
+                <label><input type="radio" name="procedure" value="passeport" required><span>Passeport</span></label>
+                <label><input type="radio" name="procedure" value="caf"><span>CAF</span></label>
+                <label><input type="radio" name="procedure" value="sejour"><span>Titre de séjour</span></label>
               </div>
-              <div class="sheet-row">
-                <span class="sheet-label">Nom</span>
-                <span class="cerfa-boxes" data-word="MARTIN"></span>
+              <button class="btn btn-primary simulator-next" type="submit">Commencer la simulation</button>
+            </fieldset>
+            <fieldset class="simulator-step" data-question-step hidden>
+              <legend data-question-title></legend>
+              <div class="choice-grid" data-question-options></div>
+              <div class="simulator-actions">
+                <button class="btn btn-secondary" type="button" data-back>Retour</button>
+                <button class="btn btn-primary" type="submit" data-next>Continuer</button>
               </div>
-              <div class="sheet-row">
-                <span class="sheet-label">Prénom</span>
-                <span class="cerfa-boxes" data-word="AWA"></span>
-              </div>
-              <div class="sheet-row">
-                <span class="sheet-label">Né(e) le</span>
-                <span class="cerfa-boxes cerfa-boxes-num" data-word="14031994"></span>
-              </div>
-              <div class="sheet-row">
-                <span class="sheet-label">Motif</span>
-                <span class="cerfa-boxes" data-word="ETUDES"></span>
-              </div>
+            </fieldset>
+          </form>
+
+          <div class="simulator-output" data-output hidden>
+            <div class="simulator-summary">
+              <p class="output-label">Démarche identifiée</p>
+              <h3 data-form-name>Formulaire en cours d’identification</h3>
+              <p data-form-detail>Répondez aux questions fictives pour organiser le dossier.</p>
             </div>
-            <div class="console-side">
-              <div class="side-group">
-                <div class="side-row"><span>Statut</span><strong id="console-status">Préremplissage en cours</strong></div>
-                <div class="side-row"><span>Pièces repérées</span><strong>3 requises</strong></div>
-                <div class="side-row"><span>Sortie</span><strong>Dossier à relire</strong></div>
+            <div class="simulator-workspace">
+              <div class="form-preview" aria-label="Aperçu du formulaire fictif">
+                <div class="preview-head"><span>Aperçu</span><strong data-preview-status>À compléter</strong></div>
+                <dl data-preview-fields></dl>
               </div>
-              <div class="side-group steps-rail" aria-label="Progression interne simulée">
-                <div class="dossier-step is-current"><span>1</span>Situation lue</div>
-                <div class="dossier-step"><span>2</span>Pièces vérifiées</div>
-                <div class="dossier-step"><span>3</span>Dossier prêt</div>
+              <div class="document-checklist">
+                <h3>Pièces du scénario</h3>
+                <p>Aucun document réel n’est importé ni analysé.</p>
+                <ul data-documents></ul>
               </div>
             </div>
           </div>
+          <p class="simulator-live sr-only" role="status" aria-live="polite" data-simulator-live></p>
         </div>
       </div>
     </div>
@@ -168,57 +181,51 @@ FORM: modern guichet numérique, direct redesign under explicit brief, replacing
   <section class="demo" id="demo" aria-labelledby="demo-heading">
     <div class="wrap">
       <div class="section-heading section-heading-wide">
-        <h2 id="demo-heading">Formalia en situation</h2>
-        <p class="section-lede">Trois exemples simulés, pour donner une idée concrète de ce que fait l'agent — aucun de ces échanges n'est réel, ce sont des illustrations du mécanisme.</p>
+        <h2 id="demo-heading">Explorez selon votre situation</h2>
+        <p class="section-lede">Regroupez les démarches qui peuvent se présenter au même moment. Cette exploration est indicative&nbsp;: Formalia ne donne ici aucun conseil juridique ou administratif.</p>
       </div>
 
-      <div class="demo-frame panel" data-demo>
-        <div class="demo-tabs" role="tablist" aria-label="Choisir un exemple de démarche">
-          <button type="button" class="demo-tab is-active" role="tab" aria-selected="true" aria-controls="demo-panel-passeport" id="demo-tab-passeport" data-target="passeport">Passeport</button>
-          <button type="button" class="demo-tab" role="tab" aria-selected="false" aria-controls="demo-panel-caf" id="demo-tab-caf" data-target="caf">Dossier CAF</button>
-          <button type="button" class="demo-tab" role="tab" aria-selected="false" aria-controls="demo-panel-sejour" id="demo-tab-sejour" data-target="sejour">Titre de séjour</button>
+      <div class="demo-frame panel" data-profiles>
+        <div class="demo-tabs" role="tablist" aria-label="Choisir un profil">
+          <button type="button" class="demo-tab is-active" role="tab" aria-selected="true" aria-controls="profile-panel-demenagement" id="profile-tab-demenagement" data-target="demenagement">Je déménage</button>
+          <button type="button" class="demo-tab" role="tab" aria-selected="false" aria-controls="profile-panel-papiers" id="profile-tab-papiers" data-target="papiers" tabindex="-1">Je renouvelle mes papiers</button>
+          <button type="button" class="demo-tab" role="tab" aria-selected="false" aria-controls="profile-panel-france" id="profile-tab-france" data-target="france" tabindex="-1">J’arrive en France</button>
         </div>
 
-        <div class="demo-panel is-active" id="demo-panel-passeport" role="tabpanel" aria-labelledby="demo-tab-passeport" data-panel="passeport">
-          <div class="demo-transcript">
-            <p class="demo-bubble demo-bubble-user"><span class="demo-who">Vous</span>Mon passeport expire dans deux mois, je vis à Lyon et je pars en voyage en juillet.</p>
-            <p class="demo-bubble demo-bubble-agent"><span class="demo-who">Formalia</span>Renouvellement de passeport identifié (Cerfa n° 12100*02). Il vous faut : une photo d'identité récente, un justificatif de domicile à Lyon, votre ancien passeport. Je prépare le dossier avec vos informations déjà connues.</p>
-            <p class="demo-bubble demo-bubble-result"><span class="demo-who">Formalia</span>Dossier prérempli, prêt à relire — délai en mairie de Lyon généralement inférieur à celui d'un dépôt sans rendez-vous.</p>
+        <div class="profile-panel" id="profile-panel-demenagement" role="tabpanel" aria-labelledby="profile-tab-demenagement" data-panel="demenagement">
+          <div>
+            <h3>Un changement d’adresse, plusieurs dossiers à synchroniser</h3>
+            <p>Formalia pourrait rassembler les informations communes, puis préparer chaque démarche séparément pour votre relecture.</p>
           </div>
-          <div class="demo-doc" aria-hidden="true">
-            <div class="demo-doc-head"><span>Cerfa 12100*02</span><span>Renouvellement — Passeport</span></div>
-            <div class="demo-doc-row"><span>Commune de dépôt</span><strong>Lyon (69)</strong></div>
-            <div class="demo-doc-row"><span>Motif</span><strong>Renouvellement, expiration proche</strong></div>
-            <div class="demo-doc-row"><span>Pièces requises</span><strong>Photo, justif. domicile, ancien passeport</strong></div>
-          </div>
+          <ul class="profile-procedures">
+            <li>Changement de situation CAF</li>
+            <li>Dossier de logement</li>
+            <li>Mise à jour des contrats d’assurance</li>
+          </ul>
         </div>
 
-        <div class="demo-panel" id="demo-panel-caf" role="tabpanel" aria-labelledby="demo-tab-caf" hidden data-panel="caf">
-          <div class="demo-transcript">
-            <p class="demo-bubble demo-bubble-user"><span class="demo-who">Vous</span>Je viens d'emménager en colocation, je voudrais savoir si j'ai droit aux APL.</p>
-            <p class="demo-bubble demo-bubble-agent"><span class="demo-who">Formalia</span>Situation identifiée : demande d'aide au logement (APL) en colocation. Il me faut votre bail, votre dernier avis d'imposition et le montant du loyer par personne. Je commence à remplir votre dossier CAF.</p>
-            <p class="demo-bubble demo-bubble-result"><span class="demo-who">Formalia</span>Dossier CAF prérempli avec la quote-part de loyer calculée pour votre colocation — à valider avant envoi.</p>
+        <div class="profile-panel" id="profile-panel-papiers" role="tabpanel" aria-labelledby="profile-tab-papiers" hidden data-panel="papiers">
+          <div>
+            <h3>Des justificatifs communs, des demandes distinctes</h3>
+            <p>Le scénario organise les pièces réutilisables sans confondre les procédures ni prétendre les déposer à votre place.</p>
           </div>
-          <div class="demo-doc" aria-hidden="true">
-            <div class="demo-doc-head"><span>CAF — Aide au logement</span><span>Colocation</span></div>
-            <div class="demo-doc-row"><span>Statut</span><strong>Colocataire</strong></div>
-            <div class="demo-doc-row"><span>Quote-part loyer</span><strong>Calculée automatiquement</strong></div>
-            <div class="demo-doc-row"><span>Pièces requises</span><strong>Bail, avis d'imposition</strong></div>
-          </div>
+          <ul class="profile-procedures">
+            <li>Renouvellement de passeport</li>
+            <li>Renouvellement de carte d’identité</li>
+            <li>Mise à jour de justificatifs associés</li>
+          </ul>
         </div>
 
-        <div class="demo-panel" id="demo-panel-sejour" role="tabpanel" aria-labelledby="demo-tab-sejour" hidden data-panel="sejour">
-          <div class="demo-transcript">
-            <p class="demo-bubble demo-bubble-user"><span class="demo-who">Vous</span>Mon titre de séjour étudiant se termine en septembre, je continue mes études l'an prochain.</p>
-            <p class="demo-bubble demo-bubble-agent"><span class="demo-who">Formalia</span>Renouvellement identifié (Cerfa n° 12100*07, motif études). Il me faut votre certificat de scolarité, un justificatif de ressources et votre titre actuel. Je prépare le dossier en préfecture.</p>
-            <p class="demo-bubble demo-bubble-result"><span class="demo-who">Formalia</span>Dossier prérempli avec anticipation du délai préfectoral — pensez à déposer avant l'échéance de septembre.</p>
+        <div class="profile-panel" id="profile-panel-france" role="tabpanel" aria-labelledby="profile-tab-france" hidden data-panel="france">
+          <div>
+            <h3>Comprendre l’ordre des formalités sans tout ressaisir</h3>
+            <p>Formalia préparerait un dossier par organisme, avec une checklist distincte et une validation humaine à chaque étape.</p>
           </div>
-          <div class="demo-doc" aria-hidden="true">
-            <div class="demo-doc-head"><span>Cerfa 12100*07</span><span>Renouvellement — Titre de séjour</span></div>
-            <div class="demo-doc-row"><span>Motif</span><strong>Études</strong></div>
-            <div class="demo-doc-row"><span>Échéance</span><strong>Septembre</strong></div>
-            <div class="demo-doc-row"><span>Pièces requises</span><strong>Certificat scolarité, ressources</strong></div>
-          </div>
+          <ul class="profile-procedures">
+            <li>Visa ou titre de séjour selon la situation</li>
+            <li>Ouverture d’un dossier logement</li>
+            <li>Démarches de couverture et d’assurance</li>
+          </ul>
         </div>
       </div>
     </div>

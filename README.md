@@ -17,7 +17,7 @@ tel quel par **GitHub Pages**.
 ```
 index.html     Page unique
 styles.css     Styles (portail administratif moderne, institutionnel et sobre)
-script.js      Animation du dossier + gestion des formulaires
+script.js      Simulateur, navigation active et gestion des formulaires
 assets/        Favicon SVG
 PRODUCT.md     Contexte produit (Impeccable) : hypothèses posées, à relire
 ```
@@ -40,6 +40,20 @@ documenté sur la page elle-même, section « En toute franchise »). Avant la
 mise en ligne définitive, branchez un vrai service de collecte d'e-mails
 (Formspree, Buttondown, Mailchimp, votre propre API…) dans `script.js`
 (fonction `wireForm`).
+
+## Simulation interactive
+
+Le premier écran contient une démonstration entièrement locale pour trois
+scénarios fictifs (passeport, CAF et titre de séjour). Les réponses proposées
+ne demandent aucune donnée personnelle et ne quittent jamais le navigateur.
+Elles servent uniquement à illustrer l'identification d'une démarche,
+l'organisation d'une checklist documentaire et le préremplissage progressif
+d'un aperçu. Aucun document réel n'est importé, analysé ou validé, et aucun
+formulaire administratif n'est transmis.
+
+La simulation couvre ses états initial, en cours, terminé et réinitialisé.
+Elle reste utilisable au clavier et devient instantanée lorsque
+`prefers-reduced-motion: reduce` est activé.
 
 ## Déploiement (GitHub Pages)
 
